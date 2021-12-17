@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="main_content">
+      <div class="login-page">
+        <div class="form">
+          <form class="register-form" id="regis_form">
+            <input type="text" placeholder="username" />
+            <input type="password" placeholder="password" />
+            <!-- <input type="password" placeholder="Confirm password" id="password" /> -->
+            <input type="text" placeholder="email" />
+            <button type="button">Create</button>
+            <p class="message">Already Registered? <a href="#">Login</a></p>
+          </form>
+          <form class="login-form" id="myForm">
+            <input type="text" placeholder="username" id="username" />
+            <input type="password" placeholder="password" id="password" />
+
+            <button type="submit" id="btn-submit">login</button>
+            <p class="message">Not Registered? <a href="#">Register</a></p>
+          </form>
+        </div>
+      </div>
+      <div class="users-page">
+        <button id="btn">DOCTORS</button>
+        <button id="btn">PACIENT</button>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js.js"></script>
+    <script>
+      $(".message a").click(function () {
+        $("form").animate({ height: "toggle", opacity: "toggle" }, "slow");
+      });
+      const myForm = document.getElementById("myForm");
+
+      myForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const formData = new FormData(this);
+
+        fetch("http://aiger555.pythonanywhere.com/?format=json", {
+          method: "post",
+          headers: { mode: "no-cors" },
+          body: formData,
+        })
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (json) {
+            console.log(text);
+          })
+          .catch(function (error) {
+            console.error(error);
+          });
+      });
+
+      // const regis_form = document.getElementById("regis_form");
+
+      // regis_form.addEventListener("button", function (e) {
+      //   e.preventDefault();
+
+      //   const formData = new FormData(this);
+
+      //   fetch("aiger555.pythonanywhere.com/rest-auth/registration/--", {
+      //     method: "post",
+      //     headers: { mode: "no-cors" },
+      //     body: formData,
+      //   })
+      //     .then(function (response) {
+      //       return response.text();
+      //     })
+      //     .then(function (text) {
+      //       console.log(text);
+      //     })
+      //     .catch(function (error) {
+      //       console.error(error);
+      //     });
+      // });
+    </script>
+  </body>
+</html>
